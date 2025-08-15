@@ -1,4 +1,0 @@
-pyrogram
-yt-dlp
-aiohttp
-python-dotenv
