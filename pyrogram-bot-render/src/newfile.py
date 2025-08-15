@@ -6,6 +6,22 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 import yt_dlp
 import logging
+from dotenv import load_dotenv
+import sys
+
+load_dotenv()  # optional: loads .env in local dev
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+API_ID = os.getenv("API_ID")
+API_HASH = os.getenv("API_HASH")
+
+if not BOT_TOKEN:
+    print("ERROR: BOT_TOKEN environment variable is not set. Set it in Render Environment Variables.")
+    sys.exit(1)
+
+# If your code needs API_ID/API_HASH for additional features, validate them too:
+if not API_ID or not API_HASH:
+    print("WARNING: API_ID/API_HASH not set. If you only run a bot using BOT_TOKEN this may be fine.")
 
 def human_readable_size(size):
     if not size:
@@ -17,22 +33,12 @@ def human_readable_size(size):
         size /= 1024.0
     return f"{size:.2f}PB"
 
-API_ID = os.environ.get("API_ID")
-API_HASH = os.environ.get("API_HASH")
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
-
-if not API_ID or not API_HASH:
-    raise RuntimeError("API_ID and API_HASH must be set in the environment")
-
-try:
-    api_id = int(API_ID)
-except ValueError:
-    raise RuntimeError("API_ID must be an integer")
-
-if BOT_TOKEN:
-    app = Client("bot", api_id=api_id, api_hash=API_HASH, bot_token=BOT_TOKEN)
-else:
-    app = Client("user", api_id=api_id, api_hash=API_HASH)
+app = Client(
+    "downloader_bot",
+    api_id=int(API_ID) if API_ID else None,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
+)
 
 def do_extract(url):
     opts = {
