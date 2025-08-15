@@ -14,20 +14,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps
-COPY requirements.txt .
+# Install Python deps (requirements.txt is inside pyrogram-bot-render/)
+COPY pyrogram-bot-render/requirements.txt .
+
 RUN python -m pip install --upgrade pip setuptools wheel \
     && pip install -r requirements.txt
 
-# Copy application code
-COPY . .
+# Copy application code from the subfolder
+COPY pyrogram-bot-render/ .
 
-# Create non-root user and switch
 RUN useradd --create-home appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Default command: run the bot. Adjust if your Procfile/render.yaml uses a different command
-CMD ["python", "bot.py"]
-
-# Python
-# (Moved ignore patterns to .dockerignore file)
+CMD ["python", "src/newfile.py"]
