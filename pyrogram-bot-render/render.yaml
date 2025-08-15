@@ -1,4 +1,5 @@
 name: pyrogram-bot-render
+type: worker
 env:
   API_ID: ${API_ID}
   API_HASH: ${API_HASH}
