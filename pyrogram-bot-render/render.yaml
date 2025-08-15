@@ -1,11 +1,12 @@
-name: pyrogram-bot-render
-type: worker
-env:
-  API_ID: ${API_ID}
-  API_HASH: ${API_HASH}
-  BOT_TOKEN: ${BOT_TOKEN}
-build:
-  commands:
-    - pip install -r requirements.txt
-start:
-  command: python src/newfile.py
+services:
+  - type: worker
+    name: pyrogram-bot-render
+    envVars:
+      - key: API_ID
+        value: ${API_ID}
+      - key: API_HASH
+        value: ${API_HASH}
+      - key: BOT_TOKEN
+        value: ${BOT_TOKEN}
+    buildCommand: pip install -r requirements.txt
+    startCommand: python src/newfile.py
