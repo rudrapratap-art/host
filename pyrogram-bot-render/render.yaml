@@ -1,0 +1,10 @@
+name: pyrogram-bot-render
+env:
+  API_ID: ${API_ID}
+  API_HASH: ${API_HASH}
+  BOT_TOKEN: ${BOT_TOKEN}
+build:
+  commands:
+    - pip install -r requirements.txt
+start:
+  command: python src/newfile.py
