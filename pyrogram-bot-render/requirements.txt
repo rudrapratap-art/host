@@ -1,6 +1,4 @@
 pyrogram
 yt-dlp
 aiohttp
-asyncio
 python-dotenv
-logging
