@@ -26,4 +26,8 @@ COPY . .
 RUN useradd --create-home appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Default command: run the bot. Adjust if your Procfile/render.yaml uses a
+# Default command: run the bot. Adjust if your Procfile/render.yaml uses a different command
+CMD ["python", "bot.py"]
+
+# Python
+# (Moved ignore patterns to .dockerignore file)
